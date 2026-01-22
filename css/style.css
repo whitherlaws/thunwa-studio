@@ -1,0 +1,613 @@
+/* General Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* --- Color Variables Definition --- */
+:root {
+  --color-primary: #800000; /* Deep Maroon (Main Brand Color) */
+  --color-primary-dark: #5e0000; /* Darker Maroon (Hover/Active) */
+  --color-accent: #c86464; /* Lighter Maroon/Rose (Accent/Secondary) */
+  --color-background-light: #f4f7f6; /* Light Grey (Main Background) */
+  --color-background-section: #ffffff; /* White (Section Background) */
+  --color-background-form: #f0f0f5; /* Very Light Grey/Blue (Contact BG) */
+  --color-text-dark: #1a1a1a; /* Almost Black (Headings) */
+  --color-text-medium: #333; /* Dark Grey (Body Text) */
+  --color-text-light: #666; /* Medium Grey (Descriptions) */
+  --color-footer-bg: #1a1a1a; /* Black (Footer Background) */
+  --color-footer-text: #ccc; /* Light Grey (Footer Text) */
+  --color-border: #ccc; /* Light Border */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  line-height: 1.6;
+  background-color: var(--color-background-light);
+  color: var(--color-text-medium);
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--color-text-dark);
+  line-height: 1.2;
+  font-family: "Noto Serif", serif;
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-primary); /* Links default to primary */
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: var(--color-primary-dark);
+}
+
+/* --- Header & Navigation --- */
+header {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  transform: translateY(-100%);
+  transition: transform 0.3s ease-in-out;
+  background: var(--color-background-section);
+}
+
+#site-header.show-header {
+  transform: translateY(0);
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.8rem; /* Adjusted for consistency, changed from 2rem */
+  font-weight: 700;
+  color: var(--color-primary); /* Logo color */
+}
+
+.logo img {
+  width: 50px;
+  margin-top: -5px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+nav a {
+  color: var(--color-text-medium);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+nav a:hover {
+  color: var(--color-primary);
+}
+
+/* Hero Nav */
+.header {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 300;
+}
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+}
+
+@media (max-width: 768px) {
+  .header .container {
+    flex-direction: column;
+    text-align: center;
+    padding: 15px 0 0 0;
+  }
+
+  .header .logo-hero {
+    margin-bottom: 10px;
+  }
+
+  .header nav ul {
+    gap: 15px;
+    padding-bottom: 10px;
+    justify-content: center;
+  }
+}
+
+.header .logo-hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.8rem; /* Adjusted for consistency, changed from 2rem */
+  font-weight: 700;
+  color: white; /* Logo color */
+}
+
+.header .logo-hero img {
+  width: 50px;
+  margin-top: -5px;
+}
+
+.header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+.header nav a {
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.header nav a:hover {
+  color: var(--color-primary);
+}
+
+/* --- Hero Section --- */
+/* --- Hero Section with Video Background --- */
+.hero {
+  /* Remove old gradient, set dark fallback background */
+  background: var(--color-text-dark);
+  color: var(
+    --color-background-section
+  ); /* Text is now light to contrast with potential dark video */
+  padding: 0; /* Padding is handled by the content overlay */
+  text-align: center;
+  height: 100vh; /* Make the hero section taller */
+  position: relative; /* Crucial for positioning the video and overlay */
+  overflow: hidden; /* Ensures video edges are hidden */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 1. Video Styling: Make it cover the entire hero section */
+#hero-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* Ensure the video covers the container while maintaining aspect ratio */
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: 1; /* Place video behind the text */
+  transform: translate(-50%, -50%); /* Centering trick */
+  filter: brightness(0.5) grayscale(0.2); /* Optional: Dims and desaturates video for better text readability */
+}
+
+/* 2. Overlay Styling: Contains the text and CTAs */
+.hero-content-overlay {
+  position: relative;
+  z-index: 5; /* Place content above the video */
+  width: 100%;
+  padding: 100px 0; /* Add back padding to content */
+}
+
+/* Ensure the text is still white/light for contrast */
+.tagline-intro {
+  color: var(--color-background-section); /* White */
+  font-size: 1.7rem; /* Slightly larger intro text */
+}
+
+.rotating-text {
+  /* Retain maroon color but ensure good contrast */
+  color: var(--color-accent);
+  font-size: 3.5rem;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7); /* Optional: Adds shadow for readability */
+}
+
+/* Hide sections initially so they can fade in */
+.services,
+.service-card {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.3s ease; /* Fallback for no-js users */
+}
+
+/* --- Mobile Fix for Video Height (Optional, but recommended) --- */
+@media (max-width: 768px) {
+  .hero {
+    min-height: 60vh;
+  }
+  .rotating-text {
+    font-size: 2.5rem;
+  }
+  .tagline-intro {
+    font-size: 1.3rem;
+  }
+}
+
+/* Keyframe for the text rotation/fade effect (Kept original for fallback/style) */
+@keyframes textFade {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+.cta-button {
+  display: inline-block;
+  background-color: var(--color-primary);
+  color: var(--color-background-section);
+  padding: 12px 30px;
+  border-radius: 5px;
+  font-weight: 600;
+  margin-top: 30px;
+  transition:
+    background-color 0.3s,
+    transform 0.2s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cta-button:hover {
+  background-color: var(--color-accent);
+  color: var(--color-background-light);
+  transform: translateY(-2px);
+}
+
+/* --- Sections Styles (General) --- */
+section {
+  padding: 80px 0;
+}
+
+section:nth-child(odd) {
+  background-color: var(--color-background-section);
+}
+
+h2 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 10px;
+  color: var(--color-text-dark);
+}
+
+.section-description {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 50px;
+  font-size: 1.1rem;
+  color: var(--color-text-light);
+}
+
+/* --- Services Section --- */
+.services {
+  min-height: 100vh; /* Full viewport height */
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.service-card {
+  background: var(--color-background-light);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+  border-top: 5px solid var(--color-primary); /* Primary Maroon Card Border */
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+}
+
+.service-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+  color: var(--color-primary);
+}
+
+/* --- Projects Section --- */
+.projects {
+  h2,
+  h3,
+  h4 {
+    color: var(--color-primary-dark);
+  }
+}
+
+.projects h2 {
+  margin-bottom: 50px;
+}
+
+.projects h4 {
+  margin-top: 1rem;
+}
+
+.project-grid {
+  display: flex;
+  gap: 2rem;
+  flex-direction: column;
+}
+
+.project-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 2rem;
+  display: flex;
+  gap: 3rem;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+  border-top: 5px solid var(--color-primary);
+}
+
+.project-card .gallery {
+  width: 50%;
+}
+
+.project-card .info {
+  width: 50%;
+}
+
+.service-card,
+.project-card {
+  opacity: 0;
+  transform: translateY(30px); /* This gives it room to "pop" up */
+  will-change: transform, opacity; /* Better performance */
+}
+
+@media (max-width: 768px) {
+  .project-card {
+    flex-direction: column;
+  }
+  .project-card .gallery {
+    width: 100%;
+    height: 150px; /* Fixed height for gallery on mobile */
+  }
+
+  .project-card .info {
+    width: 100%;
+  }
+}
+
+/* Project Gallery */
+.gallery {
+  position: relative;
+  height: 300px; /* Adjust height to match your design */
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.gallery img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Ensures images fill the area without stretching */
+  opacity: 0; /* Hidden by default */
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Ensure the first image is visible immediately */
+.gallery img:first-child {
+  opacity: 1;
+}
+
+/* --- Contact Section --- */
+.contact-methods-grid {
+  display: grid;
+  /* Two columns on desktop, adapts to one column on smaller screens */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding-top: 30px;
+}
+
+.contact-link-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 20px;
+  background: var(--color-background-section); /* White background */
+  border: 1px solid rgba(128, 0, 0, 0.1); /* Light maroon border */
+  border-radius: 10px;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.contact-link-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+  border-color: var(--color-primary);
+}
+
+.icon-label {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 10px;
+}
+
+.contact-detail {
+  font-size: 1rem;
+  color: var(--color-text-medium);
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.contact-detail svg {
+  fill: var(--color-primary);
+}
+
+/* --- Mobile adjustment for Contact Section --- */
+@media (max-width: 600px) {
+  .contact-methods-grid {
+    grid-template-columns: 1fr; /* Stack links vertically on small screens */
+  }
+}
+
+/* --- Footer --- */
+footer {
+  background-color: var(--color-primary-dark);
+  color: var(--color-footer-text);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 0.9rem;
+}
+
+/* --- Responsiveness (Media Queries) --- */
+/* Tablets and smaller desktops */
+@media (max-width: 992px) {
+  .hero {
+    padding: 80px 0;
+  }
+  .rotating-text {
+    font-size: 2.5rem;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+  section {
+    padding: 60px 0;
+  }
+}
+
+/* Mobile devices */
+@media (max-width: 768px) {
+  /* Header changes */
+  header .container {
+    flex-direction: column;
+    text-align: center;
+    padding: 15px 0 0 0;
+  }
+
+  .logo {
+    margin-bottom: 10px;
+  }
+
+  nav ul {
+    gap: 15px;
+    padding-bottom: 10px;
+    justify-content: center;
+  }
+
+  /* Hero changes */
+  .hero {
+    min-height: 60vh;
+    padding: 60px 0;
+  }
+  .rotating-text {
+    font-size: 2rem;
+  }
+  .tagline-intro {
+    font-size: 1.2rem;
+  }
+
+  .cta-button {
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+  }
+
+  /* Services grid becomes vertical stack for smaller screens */
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-card {
+    padding: 25px;
+  }
+}
+
+/* --- Text Transition Classes (for JS) --- */
+
+/* Keyframe for fading the text OUT */
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+/* Keyframe for fading the text IN */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Base styles for the rotating text element */
+.rotating-text {
+  /* Keep existing font styles */
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--color-background-form);
+  min-height: 1.2em;
+  /* Ensure only one animation runs at a time */
+  animation-fill-mode: forwards;
+}
+
+/* Class applied by JS for fading OUT */
+.fade-out {
+  animation: fadeOut 0.3s ease-out forwards;
+}
+
+/* Class applied by JS for fading IN */
+.fade-in {
+  animation: fadeIn 0.3s ease-in forwards;
+}
+
+/* Placeholder */
+textarea,
+::placeholder {
+  font-family: "Poppins", sans-serif;
+}
